@@ -36,6 +36,7 @@ async function loadAdobeDTM() {
     window.appEventData = window.appEventData || [];
     window.appEventData.push(...JSON.parse(appEventData));
     sessionStorage.removeItem('appEventData');
+    console.log('Restored the following clicks', window.appEventData);
   }
 }
 
