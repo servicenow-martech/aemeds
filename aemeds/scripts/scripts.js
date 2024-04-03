@@ -25,6 +25,7 @@ const LCP_BLOCKS = []; // add your LCP blocks to the list
 const LCP_WAIT_SKIP_TEMPLATE = [
   'blog-home-page',
 ];
+
 export const serviceNowDefaultOrigin = 'https://www.servicenow.com';
 export const TAGS_QUERY_INDEX = '/blogs/tags.json';
 
@@ -41,13 +42,22 @@ export function analyticsCanonicStr(str) {
 }
 
 export function analyticsGlobalClickTrack(digitalData, event) {
-  window.appEventData = window.appEventData || [];
+  
   const data = {
     name: 'global_click',
     digitalData,
     event,
   };
-  window.appEventData.push(data);
+  if (window.AppMeasurement) {
+    window.appEventData = window.appEventData || [];
+    window.appEventData.push(data);
+  } else {
+    let sessionData = sessionStorage.getItem('appEventData') || '[]';
+    sessionData = JSON.parse(sessionData);
+    sessionData.push(data);
+    sessionStorage.setItem('appEventData', JSON.stringify(sessionData));
+  }
+  
   // eslint-disable-next-line no-console
   console.log(JSON.stringify(data, undefined, 4));
 }

@@ -12,23 +12,29 @@ async function loadAdobeDTM() {
   const searchParams = new URLSearchParams(window.location.search);
   const env = searchParams.get('launch');
   if (env === 'prod') {
-    loadScript(prod, { async: '' });
+    await loadScript(prod, { async: '' });
     return;
   }
 
   if (env === 'stage') {
-    loadScript(stage, { async: '' });
+    await loadScript(stage, { async: '' });
     return;
   }
 
   const { host } = window.location;
   if (host === 'servicenow.com' || host === 'www.servicenow.com') {
-    loadScript(prod, { async: '' });
+    await loadScript(prod, { async: '' });
   } else {
     if (searchParams.get('disableLaunch') === 'true') {
       return;
     }
-    loadScript(stage, { async: '' });
+    await loadScript(stage, { async: '' });
+  }
+
+  const appEventData = sessionStorage.getItem('appEventData');
+  if (appEventData) {
+    window.appEventData = [...JSON.parse(appEventData)];
+    sessionStorage.removeItem('appEventData');
   }
 }
 
