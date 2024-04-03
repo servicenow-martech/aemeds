@@ -33,7 +33,8 @@ async function loadAdobeDTM() {
 
   const appEventData = sessionStorage.getItem('appEventData');
   if (appEventData) {
-    window.appEventData = [...JSON.parse(appEventData)];
+    window.appEventData = window.appEventData || [];
+    window.appEventData.push(...JSON.parse(appEventData));
     sessionStorage.removeItem('appEventData');
   }
 }
