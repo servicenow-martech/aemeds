@@ -31,13 +31,15 @@ async function loadAdobeDTM() {
     await loadScript(stage, { async: '' });
   }
 
-  const appEventData = sessionStorage.getItem('appEventData');
-  if (appEventData) {
-    window.appEventData = window.appEventData || [];
-    window.appEventData.push(...JSON.parse(appEventData));
-    sessionStorage.removeItem('appEventData');
-    console.log('Restored the following clicks', window.appEventData);
-  }
+  setTimeout(() => {
+    const appEventData = sessionStorage.getItem('appEventData');
+    if (appEventData) {
+      window.appEventData = window.appEventData || [];
+      window.appEventData.push(...JSON.parse(appEventData));
+      sessionStorage.removeItem('appEventData');
+      console.log('Restored the following clicks', window.appEventData);
+    }
+  }, 2000);
 }
 
 loadAdobeDTM();
