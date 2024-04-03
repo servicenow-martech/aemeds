@@ -53,6 +53,7 @@ export function analyticsGlobalClickTrack(digitalData, event) {
     window.appEventData.push(data);
   } else {
     console.log('AppMeasurement not available, storing in session storage');
+    data.digitalData.event.eVar2 = window.location.href.replace('https://', '');
     let sessionData = sessionStorage.getItem('appEventData') || '[]';
     sessionData = JSON.parse(sessionData);
     sessionData.push(data);
