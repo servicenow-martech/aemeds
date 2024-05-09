@@ -201,7 +201,7 @@ const RULES = {
 
 async function fetchRuleBasedCards(config, cardInfos, idx, block) {
   const blogs = ffetch(BLOG_QUERY_INDEX)
-    .chunks(250)
+    .chunks(1048576)
     .sheet('blogs');
 
   const ruleName = toClassName(config.rule);

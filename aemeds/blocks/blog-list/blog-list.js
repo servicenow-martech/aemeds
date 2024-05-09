@@ -172,7 +172,7 @@ export default async function decorate(block) {
 
   // retrieve and filter blog entries
   const blogs = ffetch(BLOG_QUERY_INDEX)
-    .chunks(250)
+    .chunks(1048576)
     .sheet('blogs')
     .filter(BLOG_FILTERS.locale)
     .filter((blog) => filter(filterValue, blog));
