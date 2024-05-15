@@ -11,50 +11,21 @@
  */
 
 /* eslint-disable no-restricted-syntax,  no-await-in-loop */
+
 async function* request(url, context) {
-  window.indexCache = window.indexCache || new Map();
-
-  const cache = window.indexCache;
-
   const { chunkSize, sheetName, fetch } = context;
   for (let offset = 0, total = Infinity; offset < total; offset += chunkSize) {
     const params = new URLSearchParams(`offset=${offset}&limit=${chunkSize}`);
     if (sheetName) params.append('sheet', sheetName);
-
-    // Include window location in the cache key
-    const cacheKey = `${url}?${params.toString()}`;
-
-    let json;
-
-    const cachedData = cache.get(cacheKey);
-    if (cachedData) {
-      const { data, timestamp } = cachedData;
-      const currentTime = new Date().getTime();
-      // Check if the cached data is older than 30 seconds
-      if (currentTime - timestamp > 30 * 1000) {
-        // If it is, remove it from the sessionStorage
-        cache.remove(cacheKey);
-      } else {
-        // If it's not, use the cached data
-        json = data;
-      }
-    }
-
-    if (!json) {
       const resp = await fetch(`${url}?${params.toString()}`);
       if (resp.ok) {
-        json = await resp.json();
-        // Store the data along with the current timestamp
-        const cachedValue = { data: json, timestamp: new Date().getTime() };
-        cache.set(cacheKey, cachedValue);
-      } else {
-        return;
-      }
-    }
-
+      const json = await resp.json();
     total = json.total;
     context.total = total;
     for (const entry of json.data) yield entry;
+    } else {
+      return;
+    }
   }
 }
 
