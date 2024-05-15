@@ -17,12 +17,12 @@ async function* request(url, context) {
   for (let offset = 0, total = Infinity; offset < total; offset += chunkSize) {
     const params = new URLSearchParams(`offset=${offset}&limit=${chunkSize}`);
     if (sheetName) params.append('sheet', sheetName);
-      const resp = await fetch(`${url}?${params.toString()}`);
-      if (resp.ok) {
+    const resp = await fetch(`${url}?${params.toString()}`);
+    if (resp.ok) {
       const json = await resp.json();
-    total = json.total;
-    context.total = total;
-    for (const entry of json.data) yield entry;
+      total = json.total;
+      context.total = total;
+      for (const entry of json.data) yield entry;
     } else {
       return;
     }
