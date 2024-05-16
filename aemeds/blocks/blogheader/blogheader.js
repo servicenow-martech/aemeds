@@ -110,13 +110,21 @@ async function processChunk(block, blogs, searchTerms, container) {
   }
 }
 
-async function handleSearch(block) {
+async function handleSearch(block, force = false) {
   const searchValue = block.querySelector('input').value;
-  const searchResults = block.querySelector('.search-results');
+  const oldSearchResults = block.querySelector('.search-results');
+
+  const parentNode = oldSearchResults.parentNode;
+  oldSearchResults.remove();
+
+  div({ class: 'search-results' });
+
+  const searchResults = div({ class: 'search-results' });
+  parentNode.appendChild(searchResults);
 
   focusSearch(block);
 
-  if (searchValue.length < 3) {
+  if (!force && searchValue.length < 3) {
     searchResults.style.display = 'none';
     return;
   }
@@ -206,6 +214,7 @@ export default async function decorate(block) {
             type: 'text',
             'aria-label': placeholders.search || 'Search',
             oninput: () => { debouncedSearch(); },
+            onkeydown: (e) => { if (e.code === 'Enter') { e.preventDefault(); handleSearch(block, true); } },
             onkeyup: (e) => { if (e.code === 'Escape') { delayedBlur(); } },
             onblur: () => { delayedBlur(); },
             onfocus: () => { focusSearch(block); },
