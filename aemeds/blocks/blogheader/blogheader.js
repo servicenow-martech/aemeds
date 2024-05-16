@@ -114,13 +114,14 @@ async function handleSearch(block, force = false) {
   const searchValue = block.querySelector('input').value;
   const oldSearchResults = block.querySelector('.search-results');
 
-  const parentNode = oldSearchResults.parentNode;
+  // eslint-disable-next-line prefer-destructuring
+  const parentElement = oldSearchResults.parentElement;
   oldSearchResults.remove();
 
   div({ class: 'search-results' });
 
   const searchResults = div({ class: 'search-results' });
-  parentNode.appendChild(searchResults);
+  parentElement.appendChild(searchResults);
 
   focusSearch(block);
 
