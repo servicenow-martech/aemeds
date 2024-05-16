@@ -65,6 +65,7 @@ function blurSearch(block) {
 
 async function processChunk(block, blogs, searchTerms, container) {
   let done = false;
+  let authorLink = null;
   const locale = getLocale();
   const prefixLength = getLocaleInfo().placeholdersPrefix.length;
   const foundInHeader = [];
@@ -82,6 +83,13 @@ async function processChunk(block, blogs, searchTerms, container) {
     const result = generate.value;
     if (result.locale !== locale) {
       continue;
+    }
+
+    // full match of author
+    if (searchTerms.join(' ').toLowerCase() === result.author.toLowerCase()) {
+      authorLink = a({ href: result.authorUrl }, result.author);
+      done = true;
+      break;
     }
 
     if (searchTerms.some((term) => result.header.toLowerCase().includes(term))) {
@@ -102,7 +110,13 @@ async function processChunk(block, blogs, searchTerms, container) {
     }
   }
 
-  container.append(...[...foundInHeader, ...foundInMeta, ...foundInContent]);
+  if (authorLink) {
+    container.innerHTML = '';
+    container.append(authorLink);
+  } else {
+    container.append(...[...foundInHeader, ...foundInMeta, ...foundInContent]);
+  }
+
   if (done) {
     unindicateSearch(block);
   } else {
