@@ -150,7 +150,6 @@ async function handleSearch(block, force = false) {
   indicateSearch(block);
 
   searchResults.style.display = 'block';
-  searchResults.innerHTML = '';
 
   const searchTerms = searchValue.toLowerCase().split(/\s+/).filter((item) => item !== '');
   const blogs = ffetch(BLOG_QUERY_INDEX)
