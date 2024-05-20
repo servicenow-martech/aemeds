@@ -65,12 +65,12 @@ function blurSearch(block) {
 
 async function processChunk(block, blogs, searchTerms, container) {
   let done = false;
-  let authorLink = null;
   const locale = getLocale();
   const prefixLength = getLocaleInfo().placeholdersPrefix.length;
   const foundInHeader = [];
   const foundInMeta = [];
   const foundInContent = [];
+  const foundInAuthor = [];
 
   for (let idx = 0; idx < CHUNK_SIZE; idx += 1) {
     // eslint-disable-next-line no-await-in-loop
@@ -85,11 +85,19 @@ async function processChunk(block, blogs, searchTerms, container) {
       continue;
     }
 
-    // full match of author
-    if (searchTerms.join(' ').toLowerCase() === result.author.toLowerCase()) {
-      authorLink = a({ href: result.authorUrl }, result.author);
-      done = true;
-      break;
+    // partial match of author
+    if (searchTerms.some((term) => result.author.toLowerCase().includes(term))) {
+      const link = a({ href: result.path }, result.header);
+      foundInAuthor.push(link);
+
+      // check if author link is already displayed
+      const authorElement = container.querySelector(`a[href='${result.authorUrl}']`);
+      if (!authorElement) {
+        const authorLink = a({ href: result.authorUrl }, result.author);
+        markSearchTerms(authorLink, searchTerms);
+        container.appendChild(authorLink);
+      }
+      continue;
     }
 
     if (searchTerms.some((term) => result.header.toLowerCase().includes(term))) {
@@ -110,12 +118,7 @@ async function processChunk(block, blogs, searchTerms, container) {
     }
   }
 
-  if (authorLink) {
-    container.innerHTML = '';
-    container.append(authorLink);
-  } else {
-    container.append(...[...foundInHeader, ...foundInMeta, ...foundInContent]);
-  }
+  container.append(...[...foundInAuthor, ...foundInHeader, ...foundInMeta, ...foundInContent]);
 
   if (done) {
     unindicateSearch(block);
