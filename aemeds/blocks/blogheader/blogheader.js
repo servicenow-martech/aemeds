@@ -95,7 +95,7 @@ async function processChunk(block, blogs, searchTerms, container) {
       if (!authorElement) {
         const authorLink = a({ href: result.authorUrl }, result.author);
         markSearchTerms(authorLink, searchTerms);
-        container.appendChild(authorLink);
+        container.prepend(authorLink);
       }
       continue;
     }
