@@ -14,6 +14,7 @@ import {
   toClassName,
   waitForLCP,
   loadBlock,
+  loadScript,
   readBlockConfig,
 } from './aem.js';
 import {
