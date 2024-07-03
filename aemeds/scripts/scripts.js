@@ -524,7 +524,8 @@ async function loadEager(doc) {
 
   const searchParams = new URLSearchParams(window.location.search);
   if (window.location.pathname === '/blogs/2023/ai-business-process-analyst-role'
-    && searchParams.get("loadLaunch") === "eager") {
+    && searchParams.get('loadLaunch') === 'eager') {
+    // eslint-disable-next-line no-undef
     loadAdobeDTM();
   }
 }
@@ -552,7 +553,8 @@ async function loadLazy(doc) {
 
   const searchParams = new URLSearchParams(window.location.search);
   if (window.location.pathname === '/blogs/2023/ai-business-process-analyst-role'
-    && searchParams.get("loadLaunch") === "lazy") {
+    && searchParams.get('loadLaunch') === 'lazy') {
+    // eslint-disable-next-line no-undef
     loadAdobeDTM();
   }
 
