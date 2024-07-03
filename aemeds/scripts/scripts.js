@@ -513,12 +513,6 @@ async function loadEager(doc) {
     }
   }
 
-  const searchParams = new URLSearchParams(window.location.search);
-  if (window.location.pathname === '/blogs/2023/ai-business-process-analyst-role'
-    && searchParams.get("loadLaunch") === "eager") {
-    loadAdobeDTM();
-  }
-
   try {
     /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
     if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
@@ -526,6 +520,12 @@ async function loadEager(doc) {
     }
   } catch (e) {
     // do nothing
+  }
+
+  const searchParams = new URLSearchParams(window.location.search);
+  if (window.location.pathname === '/blogs/2023/ai-business-process-analyst-role'
+    && searchParams.get("loadLaunch") === "eager") {
+    loadAdobeDTM();
   }
 }
 
