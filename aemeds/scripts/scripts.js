@@ -525,7 +525,7 @@ async function loadEager(doc) {
   const searchParams = new URLSearchParams(window.location.search);
   if (window.location.pathname === '/blogs/2023/ai-business-process-analyst-role'
     && searchParams.get("loadLaunch") === "eager") {
-    setTimeout(() => loadAdobeDTM());
+    loadAdobeDTM();
   }
 }
 
