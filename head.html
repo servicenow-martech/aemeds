@@ -34,7 +34,7 @@
 
     const searchParams = new URLSearchParams(window.location.search);
     if (window.location.pathname === '/blogs/2023/ai-business-process-analyst-role'
-      && searchParams.get("disableLaunch") === "true") {
+      && searchParams.get("loadLaunch") && searchParams.get("loadLaunch") !== "head") {
       return;
     }
 
