@@ -12,7 +12,6 @@ const naasDomains = {
 
 export function getDataDomain() {
   const env = new URLSearchParams(window.location.search).get('naas');
-  
   return env ? naasDomains[env.toLowerCase()] || naasDomains.prod : naasDomains.prod;
 }
 
