@@ -69,7 +69,7 @@ export default async function decorate(block) {
     // load NaaS header code
     await Promise.all([
       loadCSS(`${dataDomain}/nas/csi/header/v2/headerV2CSR.bundle.css`),
-      loadCSS(`${dataDomain}/etc.clientlibs/ds/clientlibs/clientlib-arc-commons.min.css`),
+      // loadCSS(`${dataDomain}/etc.clientlibs/ds/clientlibs/clientlib-arc-commons.min.css`),
       loadScript(`${dataDomain}/nas/csi/header/v2/headerV2CSR.bundle.js`),
     ]);
 
