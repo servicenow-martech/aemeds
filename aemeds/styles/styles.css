@@ -47,12 +47,12 @@
   --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 80px;
+  --nav-height: 130px;
 }
 
 @media (max-width: 1023px) {
   :root {
-    --nav-height: 56px;
+    --nav-height: 65px;
   }
 }
 

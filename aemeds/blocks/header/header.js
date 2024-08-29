@@ -12,7 +12,6 @@ const naasDomains = {
 
 export function getDataDomain() {
   const env = new URLSearchParams(window.location.search).get('naas');
-
   return env ? naasDomains[env.toLowerCase()] || naasDomains.prod : naasDomains.prod;
 }
 
@@ -56,20 +55,22 @@ export default async function decorate(block) {
   try {
     block.append(
       section({
-        id: 'naas-header-old',
-        class: 'naas-header-old-section',
+        id: 'naas-header-v2',
+        class: 'cmp-nav__wrapper',
         'data-domain': dataDomain,
         'data-myaccount': 'hide',
         'data-search': 'hide',
         'data-sourceId': 'blogs',
         'data-lslinkshard': 'on',
+        'data-version': 'v2',
       }),
     );
 
     // load NaaS header code
     await Promise.all([
-      loadCSS(`${dataDomain}/nas/csi/header/v1/headerOldCSR.bundle.css`),
-      loadScript(`${dataDomain}/nas/csi/header/v1/headerOldCSR.bundle.js`),
+      loadCSS(`${dataDomain}/nas/csi/header/v2/headerV2CSR.bundle.css`),
+      loadCSS(`${dataDomain}/etc.clientlibs/ds/clientlibs/clientlib-arc-commons.min.css`),
+      loadScript(`${dataDomain}/nas/csi/header/v2/headerV2CSR.bundle.js`),
     ]);
 
     // trigger and wait for NaaS header rendering
