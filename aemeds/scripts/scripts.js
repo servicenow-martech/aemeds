@@ -108,27 +108,27 @@ const LOCALE_INFO = {
   'en-US': {
     urlPrefix: '',
     placeholdersPrefix: '/blogs',
-    siteName: "servicenow blogs - global"
+    siteName: 'servicenow blogs - global',
   },
   'en-GB': {
     urlPrefix: '/uk',
     placeholdersPrefix: '/uk/blogs',
-    siteName: "servicenow.com - united kingdom"
+    siteName: 'servicenow.com - united kingdom',
   },
   'de-DE': {
     urlPrefix: '/de',
     placeholdersPrefix: '/de/blogs',
-    siteName: "servicenow.com - deutsch"
+    siteName: 'servicenow.com - deutsch',
   },
   'fr-FR': {
     urlPrefix: '/fr',
     placeholdersPrefix: '/fr/blogs',
-    siteName: "servicenow.com - france"
+    siteName: 'servicenow.com - france',
   },
   'nl-NL': {
     urlPrefix: '/nl',
     placeholdersPrefix: '/nl/blogs',
-    siteName: "servicenow.com - netherlands"
+    siteName: 'servicenow.com - netherlands',
   },
 };
 
