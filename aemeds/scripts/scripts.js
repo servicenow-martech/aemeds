@@ -574,8 +574,8 @@ export async function loadPage() {
     page: {
       pageInfo: {
         siteName: getLocaleInfo().siteName || 'servicenow blogs - global',
-      }
-    }
+      },
+    },
   };
 }
 
