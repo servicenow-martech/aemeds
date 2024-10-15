@@ -573,7 +573,7 @@ export async function loadPage() {
     ...window.digitalData,
     page: {
       pageInfo: {
-        siteName: getLocaleInfo().siteName || "servicenow blogs - global"
+        siteName: getLocaleInfo().siteName || 'servicenow blogs - global',
       }
     }
   };
