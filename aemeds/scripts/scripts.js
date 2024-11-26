@@ -113,22 +113,22 @@ const LOCALE_INFO = {
   'en-GB': {
     urlPrefix: '/uk',
     placeholdersPrefix: '/uk/blogs',
-    siteName: 'servicenow.com - united kingdom',
+    siteName: 'servicenow blogs - united kingdom',
   },
   'de-DE': {
     urlPrefix: '/de',
     placeholdersPrefix: '/de/blogs',
-    siteName: 'servicenow.com - deutsch',
+    siteName: 'servicenow blogs - deutsch',
   },
   'fr-FR': {
     urlPrefix: '/fr',
     placeholdersPrefix: '/fr/blogs',
-    siteName: 'servicenow.com - france',
+    siteName: 'servicenow blogs - france',
   },
   'nl-NL': {
     urlPrefix: '/nl',
     placeholdersPrefix: '/nl/blogs',
-    siteName: 'servicenow.com - netherlands',
+    siteName: 'servicenow blogs - netherlands',
   },
 };
 
