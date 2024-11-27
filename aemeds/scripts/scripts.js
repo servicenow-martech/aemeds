@@ -565,7 +565,7 @@ function loadDelayed() {
 }
 
 export async function loadPage() {
-  if (typeof window !== undefined) {
+  if (typeof window !== 'undefined') {
     window.digitalData = window.digitalData || {};
     window.digitalData = {
       ...window.digitalData,
