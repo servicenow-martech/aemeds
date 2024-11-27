@@ -565,18 +565,20 @@ function loadDelayed() {
 }
 
 export async function loadPage() {
+  if (typeof window !== undefined) {
+    window.digitalData = window.digitalData || {};
+    window.digitalData = {
+      ...window.digitalData,
+      page: {
+        pageInfo: {
+          siteName: getLocaleInfo().siteName || 'servicenow blogs - global',
+        },
+      },
+    };
+  }
   await loadEager(document);
   await loadLazy(document);
-  await loadDelayed();
-  window.digitalData = window.digitalData || {};
-  window.digitalData = {
-    ...window.digitalData,
-    page: {
-      pageInfo: {
-        siteName: getLocaleInfo().siteName || 'servicenow blogs - global',
-      },
-    },
-  };
+  loadDelayed();
 }
 
 loadPage();
