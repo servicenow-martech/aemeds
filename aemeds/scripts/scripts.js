@@ -521,6 +521,13 @@ async function loadEager(doc) {
   } catch (e) {
     // do nothing
   }
+
+  const searchParams = new URLSearchParams(window.location.search);
+  if (window.location.pathname === '/blogs/2023/ai-business-process-analyst-role'
+    && searchParams.get('loadLaunch') === 'eager') {
+    // eslint-disable-next-line no-undef
+    loadAdobeDTM();
+  }
 }
 
 /**
@@ -543,6 +550,13 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
+
+  const searchParams = new URLSearchParams(window.location.search);
+  if (window.location.pathname === '/blogs/2023/ai-business-process-analyst-role'
+    && searchParams.get('loadLaunch') === 'lazy') {
+    // eslint-disable-next-line no-undef
+    loadAdobeDTM();
+  }
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
