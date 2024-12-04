@@ -108,22 +108,27 @@ const LOCALE_INFO = {
   'en-US': {
     urlPrefix: '',
     placeholdersPrefix: '/blogs',
+    siteName: 'servicenow blogs - global',
   },
   'en-GB': {
     urlPrefix: '/uk',
     placeholdersPrefix: '/uk/blogs',
+    siteName: 'servicenow blogs - united kingdom',
   },
   'de-DE': {
     urlPrefix: '/de',
     placeholdersPrefix: '/de/blogs',
+    siteName: 'servicenow blogs - deutsch',
   },
   'fr-FR': {
     urlPrefix: '/fr',
     placeholdersPrefix: '/fr/blogs',
+    siteName: 'servicenow blogs - france',
   },
   'nl-NL': {
     urlPrefix: '/nl',
     placeholdersPrefix: '/nl/blogs',
+    siteName: 'servicenow blogs - netherlands',
   },
 };
 
@@ -560,6 +565,17 @@ function loadDelayed() {
 }
 
 export async function loadPage() {
+  if (typeof window !== 'undefined') {
+    window.digitalData = window.digitalData || {};
+    window.digitalData = {
+      ...window.digitalData,
+      page: {
+        pageInfo: {
+          siteName: getLocaleInfo().siteName || 'servicenow blogs - global',
+        },
+      },
+    };
+  }
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
