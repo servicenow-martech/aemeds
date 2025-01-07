@@ -32,6 +32,11 @@
     const stage =
       "https://assets.adobedtm.com/a441b904b50e/a1b7254b4e1d/launch-057cf39df786-staging.min.js";
 
+    const prod2 =
+    "https://www.servicenow.com/etc.clientlibs/now-aem-www/clientlibs/clientlib-site-daso.min.ab9d2b13f17066916b90ab0b15f90e4e.js";
+    const stage2 =
+    "https://www.webstg.servicenow.com/etc.clientlibs/now-aem-www/clientlibs/clientlib-site-daso.min.ab9d2b13f17066916b90ab0b15f90e4e.js";
+
     const searchParams = new URLSearchParams(window.location.search);
     if (window.location.pathname === '/blogs/2023/ai-business-process-analyst-role'
       && searchParams.get("disableLaunch") === "true") {
@@ -41,22 +46,28 @@
     const env = searchParams.get("launch");
     if (env === "prod") {
       loadScript(prod, { async: "" });
+      loadScript(prod2, { async: "" });
+
       return;
     }
 
     if (env === "stage") {
       loadScript(stage, { async: "" });
+      loadScript(stage2, { async: "" });
       return;
     }
 
     const { host } = window.location;
     if (host === "servicenow.com" || host === "www.servicenow.com") {
       loadScript(prod, { async: "" });
+      loadScript(prod2, { async: "" });
+
     } else {
       if (searchParams.get("disableLaunch") === "true") {
         return;
       }
       loadScript(stage, { async: "" });
+      loadScript(stage2, { async: "" });
     }
   }
 
