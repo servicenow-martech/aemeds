@@ -26,6 +26,30 @@
     });
   }
 
+  async function loadEnvironmentScript(param, prodScriptURL, stageScriptURL) {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const env = searchParams.get(param);
+
+    if (env === "prod") {
+      await loadScript(prodScriptURL, { async: "" });
+      return;
+    }
+
+    if (env === "stage") {
+      await loadScript(stageScriptURL, { async: "" });
+      return;
+    }
+
+    const { host } = window.location;
+    if (host === "servicenow.com" || host === "www.servicenow.com") {
+      await loadScript(prodScriptURL, { async: "" });
+    } else {
+      await loadScript(stageScriptURL, { async: "" });
+    }
+
+  }
+
   async function loadAdobeDTM() {
     const prod =
       "https://assets.adobedtm.com/a441b904b50e/a1b7254b4e1d/launch-89f6ee0b3587.min.js";
@@ -59,6 +83,17 @@
       loadScript(stage, { async: "" });
     }
   }
+  
+  async function loadDasoScript() {
+    const prod =
+      "https://www.servicenow.com/etc.clientlibs/now-aem-www/clientlibs/clientlib-site-daso.min.ab9d2b13f17066916b90ab0b15f90e4e.js";
+    const stage =
+      "https://www.webstg.servicenow.com/etc.clientlibs/now-aem-www/clientlibs/clientlib-site-daso.min.ab9d2b13f17066916b90ab0b15f90e4e.js";
+
+    await loadEnvironmentScript("daso", prod, stage);
+  }
 
   loadAdobeDTM();
+  
+  loadDasoScript();
 </script>
