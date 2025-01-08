@@ -28,32 +28,20 @@
 
   async function loadEnvironmentScript(param, prodScriptURL, stageScriptURL) {
     const searchParams = new URLSearchParams(window.location.search);
-
     const env = searchParams.get(param);
-
-    if (searchParams.get("disableLaunch") === "true") {
-      return;
-    }
-
-    if (env === "prod") {
-      await loadScript(prodScriptURL, { async: "" });
-      return;
-    }
-
-    if (env === "stage") {
-      await loadScript(stageScriptURL, { async: "" });
-      return;
-    }
-
+    const disableLaunch = searchParams.get("disableLaunch") === "true";
     const { host } = window.location;
-    if (host === "servicenow.com" || host === "www.servicenow.com") {
-      await loadScript(prodScriptURL, { async: "" });
+
+    if (disableLaunch) return;
+
+    let scriptURL;
+
+    if (env === "prod" || (!env && (host === "servicenow.com" || host === "www.servicenow.com"))) {
+      scriptURL = prodScriptURL;
     } else {
-      if (searchParams.get("disableLaunch") === "true") {
-        return;
-      }
-      await loadScript(stageScriptURL, { async: "" });
+      scriptURL = stageScriptURL;
     }
+    await loadScript(scriptURL, { async: "" });
   }
 
   async function loadAdobeDTM() {
