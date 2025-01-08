@@ -26,23 +26,6 @@
     });
   }
 
-  async function loadEnvironmentScript(param, prodScriptURL, stageScriptURL) {
-    const searchParams = new URLSearchParams(window.location.search);
-    const env = searchParams.get(param);
-    const disableLaunch = searchParams.get("disableLaunch") === "true";
-    const { host } = window.location;
-
-    if (disableLaunch) return;
-
-    let scriptURL;
-
-    if (env === "prod" || (!env && (host === "servicenow.com" || host === "www.servicenow.com"))) {
-      scriptURL = prodScriptURL;
-    } else {
-      scriptURL = stageScriptURL;
-    }
-    await loadScript(scriptURL, { async: "" });
-  }
 
   async function loadAdobeDTM() {
     const prod =
@@ -79,12 +62,36 @@
   }
   
   async function loadDasoScript() {
-    const prod =
-      "https://www.servicenow.com/etc.clientlibs/now-aem-www/clientlibs/clientlib-site-daso.min.ab9d2b13f17066916b90ab0b15f90e4e.js";
-    const stage =
-      "https://www.webstg.servicenow.com/etc.clientlibs/now-aem-www/clientlibs/clientlib-site-daso.min.ab9d2b13f17066916b90ab0b15f90e4e.js";
+    const domainUrls = {
+      dev: 'https://www.webdev.servicenow.com',
+      qa: 'https://www.webqa.servicenow.com',
+      stage: 'https://www.webstg.servicenow.com',
+      prod: 'https://www.servicenow.com',
+    };
 
-    await loadEnvironmentScript("daso", prod, stage);
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const disableLaunch = searchParams.get("disableLaunch") === "true";
+
+    if (disableLaunch) return;
+
+    const env = searchParams.get('daso');
+
+    let dataDomain;
+
+    if (env) {
+      dataDomain = domainUrls[env.toLowerCase()] || domainUrls.prod;
+    } else {
+      dataDomain = domainUrls.prod;
+    }
+
+    const scriptUrl = `${dataDomain}/etc.clientlibs/now-aem-www/clientlibs/clientlib-site-daso.min.js`;
+   
+    try {
+      await loadScript(scriptUrl, { async: "" });
+    } catch (error) {
+      console.error(`Failed to load script from ${scriptUrl}`, error);
+    }
   }
 
   loadAdobeDTM();
