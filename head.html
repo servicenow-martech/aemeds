@@ -62,30 +62,13 @@
   }
   
   async function loadDasoScript() {
-    const domainUrls = {
-      dev: 'https://www.webdev.servicenow.com',
-      qa: 'https://www.webqa.servicenow.com',
-      stage: 'https://www.webstg.servicenow.com',
-      prod: 'https://www.servicenow.com',
-    };
-
     const searchParams = new URLSearchParams(window.location.search);
 
     const disableLaunch = searchParams.get("disableLaunch") === "true";
 
     if (disableLaunch) return;
 
-    const env = searchParams.get('daso');
-
-    let dataDomain;
-
-    if (env) {
-      dataDomain = domainUrls[env.toLowerCase()] || domainUrls.prod;
-    } else {
-      dataDomain = domainUrls.prod;
-    }
-
-    const scriptUrl = `${dataDomain}/etc.clientlibs/now-aem-www/clientlibs/clientlib-site-daso.min.js`;
+    const scriptUrl = `https://www.servicenow.com/etc.clientlibs/now-aem-www/clientlibs/clientlib-site-daso.min.js`;
    
     try {
       await loadScript(scriptUrl, { async: "" });
