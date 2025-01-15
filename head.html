@@ -59,6 +59,24 @@
       loadScript(stage, { async: "" });
     }
   }
+  
+  async function loadDasoScript() {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const disableLaunch = searchParams.get("disableLaunch") === "true";
+
+    if (disableLaunch) return;
+
+    const scriptUrl = `https://www.servicenow.com/etc.clientlibs/now-aem-www/clientlibs/clientlib-site-daso.min.js`;
+   
+    try {
+      await loadScript(scriptUrl, { async: "" });
+    } catch (error) {
+      console.error(`Failed to load script from ${scriptUrl}`, error);
+    }
+  }
 
   loadAdobeDTM();
+  
+  loadDasoScript();
 </script>
