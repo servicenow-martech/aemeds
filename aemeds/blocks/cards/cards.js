@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable max-len, no-unused-vars */
 import { createOptimizedPicture, readBlockConfig, toClassName } from '../../scripts/aem.js';
 import { a, div, h5 } from '../../scripts/dom-helpers.js';
 import ffetch from '../../scripts/ffetch.js';
@@ -111,7 +111,8 @@ export async function renderCard(post, renderTopic = true) {
             ? createOptimizedPicture(new URL(post.image, window.origin).toString(), post.header)
             : createOptimizedPicture(new URL(PLACEHOLDER_IMAGE, window.origin).toString(), post.header),
         ),
-        renderTopic && post.topic ? div({ class: 'topic-tag' }, div(await localizedTopic(post.topic))) : '',
+        // keeping this in for now, in case we need it again
+        // renderTopic && post.topic ? div({ class: 'topic-tag' }, div(await localizedTopic(post.topic))) : '',
       ),
       div({ class: 'card-text' },
         a({ href: post.path },
