@@ -111,6 +111,7 @@ export async function renderCard(post, renderTopic = true) {
             ? createOptimizedPicture(new URL(post.image, window.origin).toString(), post.header)
             : createOptimizedPicture(new URL(PLACEHOLDER_IMAGE, window.origin).toString(), post.header),
         ),
+        // keeping this in for now, in case we need it again
         // renderTopic && post.topic ? div({ class: 'topic-tag' }, div(await localizedTopic(post.topic))) : '',
       ),
       div({ class: 'card-text' },
