@@ -15,6 +15,7 @@ import {
 
 const TRENDS_AND_RESEARCH = toClassName('Trends and Research');
 const RESEARCH_CATEGORY = toClassName('ServiceNow Research');
+const EMEA_INSIGHTS_CATEGORY = toClassName('EMEA Insights');
 const PLACEHOLDER_IMAGE = '/blogs/assets/servicenow-placeholder.png';
 
 async function waitForEagerImageLoad(img) {
@@ -159,7 +160,9 @@ function fetchAPIBasedCards(cardInfos, apis) {
 async function homepageLatestRule(blogs, cardInfos, idx) {
   cardInfos[idx] = await blogs
     .filter(BLOG_FILTERS.locale)
-    .filter((blog) => !BLOG_FILTERS.category(RESEARCH_CATEGORY, blog))
+    .filter(
+      (blog) => !BLOG_FILTERS.category(RESEARCH_CATEGORY, blog) && !BLOG_FILTERS.category(EMEA_INSIGHTS_CATEGORY, blog),
+    )
     .limit(3)
     .all();
 }
