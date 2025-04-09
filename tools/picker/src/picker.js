@@ -130,7 +130,6 @@ const Picker = props => {
         })();
     }, []);
 
-
     useEffect(() => {
         (async () => {
             setState(state => ({
