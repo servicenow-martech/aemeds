@@ -161,7 +161,7 @@ async function homepageLatestRule(blogs, cardInfos, idx) {
   cardInfos[idx] = await blogs
     .filter(BLOG_FILTERS.locale)
     .filter(
-      (blog) => !BLOG_FILTERS.category(RESEARCH_CATEGORY, blog) && !BLOG_FILTERS.category(EMEA_INSIGHTS_CATEGORY, blog),
+      (blog) => !BLOG_FILTERS.category([RESEARCH_CATEGORY], blog) && !BLOG_FILTERS.category([EMEA_INSIGHTS_CATEGORY], blog),
     )
     .limit(3)
     .all();
@@ -173,7 +173,7 @@ async function homepageCategoryRule(blogs, cardInfos, idx, config) {
 
   cardInfos[idx] = await blogs
     .filter(BLOG_FILTERS.locale)
-    .filter((blog) => BLOG_FILTERS.category(toClassName(config.category), blog)
+    .filter((blog) => BLOG_FILTERS.category([toClassName(config.category)], blog)
       && !latestLinks.includes(blog.path))
     .limit(3)
     .all();
@@ -182,7 +182,7 @@ async function homepageCategoryRule(blogs, cardInfos, idx, config) {
 async function sidebarFeaturedRule(blogs, cardInfos, idx) {
   cardInfos[idx] = await blogs
     .filter(BLOG_FILTERS.locale)
-    .filter((blog) => !BLOG_FILTERS.trend(TRENDS_AND_RESEARCH, blog))
+    .filter((blog) => !BLOG_FILTERS.trend([TRENDS_AND_RESEARCH], blog))
     .filter((blog) => blog.path !== window.location.pathname)
     .limit(3)
     .all();
@@ -190,7 +190,7 @@ async function sidebarFeaturedRule(blogs, cardInfos, idx) {
 
 async function sidebarTrendsAndResearchRule(blogs, cardInfos, idx) {
   cardInfos[idx] = await blogs.filter(BLOG_FILTERS.locale)
-    .filter((blog) => BLOG_FILTERS.trend(TRENDS_AND_RESEARCH, blog))
+    .filter((blog) => BLOG_FILTERS.trend([TRENDS_AND_RESEARCH], blog))
     .filter((blog) => blog.path !== window.location.pathname)
     .limit(3)
     .all();

@@ -161,10 +161,10 @@ export function getLocale() {
 
 export const BLOG_FILTERS = {
   locale: (blog) => getLocale() === blog.locale,
-  trend: (trend, blog) => trend === toClassName(blog.trend),
-  newTrend: (newTrend, blog) => newTrend === toClassName(blog.newTrend),
-  category: (category, blog) => category === toClassName(blog.category),
-  topic: (topic, blog) => topic === toClassName(blog.topic),
+  trend: (trends, blog) => trends.includes(toClassName(blog.trend)),
+  newTrend: (newTrends, blog) => newTrends.includes(toClassName(blog.newTrend)),
+  category: (categories, blog) => categories.includes(toClassName(blog.category)),
+  topic: (topics, blog) => topics.includes(toClassName(blog.topic)),
   year: (year, blog) => year === blog.year,
   author: (authorUrl, blog) => (
     authorUrl === new URL(blog.authorUrl, serviceNowDefaultOrigin).pathname.split('.')[0]
