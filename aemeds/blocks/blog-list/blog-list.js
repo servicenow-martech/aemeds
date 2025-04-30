@@ -157,8 +157,8 @@ export default async function decorate(block) {
 
   if (['category', 'topic', 'newTrend', 'trend'].includes(filterKey)) {
     filterValue = filterValue.split(',')
-      .map(s => s.trim())
-      .map(v => toClassName(v));
+      .map((s) => s.trim())
+      .map((v) => toClassName(v));
   } else if (filterKey === 'author') {
     // eslint-disable-next-line prefer-destructuring
     filterValue = new URL(filterValue, serviceNowDefaultOrigin).pathname.split('.')[0];
