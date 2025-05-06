@@ -54,7 +54,7 @@ export async function waitImagesLoad(block) {
       continue;
     }
 
-    new Promise((resolve) => {
+    await new Promise((resolve) => {
       if (img && !img.complete) {
         img.addEventListener('load', resolve);
         img.addEventListener('error', resolve);
