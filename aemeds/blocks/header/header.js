@@ -24,11 +24,31 @@ export function fixRelativeDAMImages(block, dataDomain) {
     .forEach((image) => { image.src = new URL(new URL(image.src).pathname, dataDomain); });
 }
 
+async function isImageInView(img) {
+  return await new Promise((resolve) => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          resolve(true);
+        }
+      });
+      observer.disconnect();
+      resolve(false);
+    });
+    observer.observe(img);
+  })
+}
+
 export async function waitImagesLoad(block) {
   const images = block.querySelectorAll('img');
 
   for (let i = 0; i < images.length; i += 1) {
     const img = images[i];
+
+    if (img.loading === 'lazy' && !await isImageInView(img)) {
+      continue;
+    }
 
     // eslint-disable-next-line no-await-in-loop
     await new Promise((resolve) => {
