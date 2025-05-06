@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop, no-continue */
 import { loadCSS, loadScript } from '../../scripts/aem.js';
 import { section } from '../../scripts/dom-helpers.js';
 import { getLocale } from '../../scripts/scripts.js';
@@ -24,13 +25,35 @@ export function fixRelativeDAMImages(block, dataDomain) {
     .forEach((image) => { image.src = new URL(new URL(image.src).pathname, dataDomain); });
 }
 
+async function isImageInView(img) {
+  return new Promise((resolve) => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          resolve(true);
+        }
+      });
+      observer.disconnect();
+      resolve(false);
+    });
+    observer.observe(img);
+  });
+}
+
 export async function waitImagesLoad(block) {
   const images = block.querySelectorAll('img');
 
   for (let i = 0; i < images.length; i += 1) {
     const img = images[i];
 
-    // eslint-disable-next-line no-await-in-loop
+    if (!img) continue;
+
+    if (img.loading === 'lazy' && !await isImageInView(img)) {
+      // this image will not be loaded by the browser yet
+      continue;
+    }
+
     await new Promise((resolve) => {
       if (img && !img.complete) {
         img.addEventListener('load', resolve);
