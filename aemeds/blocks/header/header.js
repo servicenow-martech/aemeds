@@ -46,10 +46,12 @@ export async function waitImagesLoad(block) {
   for (let i = 0; i < images.length; i += 1) {
     const img = images[i];
 
+    if (!img) continue;
+
     if (img.loading === 'lazy' && !await isImageInView(img)) {
+      // this image will not be loaded by the browser yet
       continue;
     }
-
     // eslint-disable-next-line no-await-in-loop
     await new Promise((resolve) => {
       if (img && !img.complete) {
