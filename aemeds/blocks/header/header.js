@@ -96,34 +96,29 @@ export default async function decorate(block) {
       loadScript(`${dataDomain}/nas/csi/naas.csr.bundles.versioning.init.js`),
     ]);
 
-    const head = document.head || document.getElementsByTagName('head')[0];
-    let headerCSS = document.createElement('script');
-    headerCSS.setAttribute('id', 'header-bundle-css');
-    head.appendChild(headerCSS);
-    let data = { id: 'header-bundle-css', type: 'header', version: 'v3', env: dataDomain, ext: 'css' };
-    let event = new CustomEvent('naas-create-bundle', { detail: data });
-    document.dispatchEvent(event);
+    function injectNaasBundleScript(id, type, version, env, ext) {
+      const script = document.createElement('script');
+      script.id = id;
+      document.head.appendChild(script);
 
+      const event = new CustomEvent('naas-create-bundle', {
+        detail: { id, type, version, env, ext },
+      });
+      document.dispatchEvent(event);
+    }
 
-    let headerJS = document.createElement('script');
-    headerJS.setAttribute('id', 'header-bundle-js');
-    head.appendChild(headerJS);
-    data = { id: 'header-bundle-js', type: 'header', version: 'v3', env: dataDomain, ext: 'js' };
-    event = new CustomEvent('naas-create-bundle', { detail: data });
-    document.dispatchEvent(event);
+    injectNaasBundleScript('header-bundle-css', 'header', 'v3', dataDomain, 'css');
+    injectNaasBundleScript('header-bundle-js', 'header', 'v3', dataDomain, 'js');
 
-    document.addEventListener("naas-load-header", function(){
-      let unifiedHeaderUtilsScriptSrc;
-      unifiedHeaderUtilsScriptSrc = dataDomain+'/nas/common/consumers/blogs/naas-right-side-utils.v1.0.js';
-      
-      const unifiedHeaderUtilsScript = document.createElement('script');
-      unifiedHeaderUtilsScript.src = unifiedHeaderUtilsScriptSrc;
-      unifiedHeaderUtilsScript.defer = true;
-      unifiedHeaderUtilsScript.charset = 'UTF-8';
-      head?.appendChild(unifiedHeaderUtilsScript);
+    document.addEventListener('naas-load-header', () => {
+      const utilsScript = document.createElement('script');
+      utilsScript.src = `${dataDomain}/nas/common/consumers/blogs/naas-right-side-utils.v1.0.js`;
+      utilsScript.defer = true;
+      utilsScript.charset = 'UTF-8';
+      document.head?.appendChild(utilsScript);
     });
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.error(e);
+    console.error('Failed to initialize NaaS header:', e);
   }
 }
