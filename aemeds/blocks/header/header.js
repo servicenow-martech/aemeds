@@ -88,6 +88,7 @@ export default async function decorate(block) {
         'data-version':'v3', 
         'role':'banner',
         'data-theme':'dark',
+        'data-font-family': 'fontawesome',
       }),
     );
 
