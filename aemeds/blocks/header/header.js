@@ -68,7 +68,7 @@ export async function waitImagesLoad(block) {
 export async function injectNaasBundleScript(id, type, version, env, ext) {
   const script = document.createElement('script');
   script.id = id;
-  script.setAttribute('async','')
+  script.setAttribute('async', '');
   document.head.appendChild(script);
 
   const event = new CustomEvent('naas-create-bundle', {
