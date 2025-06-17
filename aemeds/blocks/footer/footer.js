@@ -37,7 +37,7 @@ export default async function decorate(block) {
     );
 
     await Promise.all([
-      loadScript(`${dataDomain}/nas/csi/naas.csr.bundles.versioning.init.js`, { async: "" }),
+      loadScript(`${dataDomain}/nas/csi/naas.csr.bundles.versioning.init.js`, { async: '' }),
     ]);
 
     // // load NaaS footer code

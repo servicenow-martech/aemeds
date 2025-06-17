@@ -108,7 +108,7 @@ export default async function decorate(block) {
 
     // load NaaS header code
     await Promise.all([
-      loadScript(`${dataDomain}/nas/csi/naas.csr.bundles.versioning.init.js`, { async: "" }),
+      loadScript(`${dataDomain}/nas/csi/naas.csr.bundles.versioning.init.js`, { async: '' }),
     ]);
 
     injectNaasBundleScript('header-bundle-css', 'header', 'v3', dataDomain, 'css');
