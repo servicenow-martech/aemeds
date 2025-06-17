@@ -6,7 +6,7 @@ import { fixRelativeDAMImages, getDataDomain, waitImagesLoad } from '../header/h
 export async function injectNaasBundleScript(id, type, version, env, ext) {
   const script = document.createElement('script');
   script.id = id;
-  script.setAttribute('defer', '');
+  script.setAttribute('async', '');
   document.body.appendChild(script);
 
   const event = new CustomEvent('naas-create-bundle', {
