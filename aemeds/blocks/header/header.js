@@ -1,5 +1,5 @@
 /* eslint-disable no-await-in-loop, no-continue */
-import { loadCSS, loadScript } from '../../scripts/aem.js';
+import { loadScript } from '../../scripts/aem.js';
 import { section } from '../../scripts/dom-helpers.js';
 import { getLocale } from '../../scripts/scripts.js';
 
@@ -65,6 +65,20 @@ export async function waitImagesLoad(block) {
   }
 }
 
+export async function injectNaasBundleScript(id, type, version, env, ext) {
+  const script = document.createElement('script');
+  script.id = id;
+  document.head.appendChild(script);
+
+  const event = new CustomEvent('naas-create-bundle', {
+    detail: {
+      id, type, version, env, ext,
+    },
+  });
+
+  document.dispatchEvent(event);
+}
+
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -78,16 +92,16 @@ export default async function decorate(block) {
   try {
     block.append(
       section({
-        'id': 'naas-header-v3',
-        'class': 'cmp-nav__wrapper',
+        id: 'naas-header-v3',
+        class: 'cmp-nav__wrapper',
         'data-domain': dataDomain,
         'data-myaccount': 'hide',
         'data-search': 'hide',
         'data-sourceId': 'www',
-        'data-lslinkshard':'on', 
-        'data-version':'v3', 
-        'role':'banner',
-        'data-theme':'dark',
+        'data-lslinkshard': 'on',
+        'data-version': 'v3',
+        role: 'banner',
+        'data-theme': 'dark',
         'data-font-family': 'fontawesome',
       }),
     );
@@ -96,17 +110,6 @@ export default async function decorate(block) {
     await Promise.all([
       loadScript(`${dataDomain}/nas/csi/naas.csr.bundles.versioning.init.js`),
     ]);
-
-    function injectNaasBundleScript(id, type, version, env, ext) {
-      const script = document.createElement('script');
-      script.id = id;
-      document.head.appendChild(script);
-
-      const event = new CustomEvent('naas-create-bundle', {
-        detail: { id, type, version, env, ext },
-      });
-      document.dispatchEvent(event);
-    }
 
     injectNaasBundleScript('header-bundle-css', 'header', 'v3', dataDomain, 'css');
     injectNaasBundleScript('header-bundle-js', 'header', 'v3', dataDomain, 'js');
