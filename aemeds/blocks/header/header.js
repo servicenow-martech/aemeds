@@ -3,6 +3,7 @@ import { loadCSS, loadScript } from '../../scripts/aem.js';
 import { section } from '../../scripts/dom-helpers.js';
 import { getLocale } from '../../scripts/scripts.js';
 
+// update to test psi
 // map containing environment configurations
 const naasDomains = {
   dev: 'https://www.webdev.servicenow.com',
