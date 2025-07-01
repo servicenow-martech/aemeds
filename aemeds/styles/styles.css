@@ -118,7 +118,7 @@ p, span {
 }
 
 p {
-  margin: 0 0 12px;
+  margin: 0 0 12px!important;
 }
 
 h1, h2, h3,
@@ -203,6 +203,7 @@ main li {
   font-size: 1.4rem;
   -webkit-font-smoothing: antialiased;
   margin-bottom: 1.2rem;
+  list-style: disc;
 }
 
 
