@@ -4,5 +4,5 @@
 
 .block .article-byline p {
   display: inline;
-  margin-right: 2rem;
+  margin-right: 2rem!important;
 }
