@@ -138,14 +138,14 @@ function fetchLinkBasedCards(cardInfos, links) {
       const header = fragmentElement.querySelector('h1').textContent;
       const image = fragmentElement.querySelector('img')
         .getAttribute('src');
-      const topic = fragmentElement.querySelector('meta[name="topic"]')
-        .getAttribute('content');
+      // const topic = fragmentElement.querySelector('meta[name="topic"]')
+      //   .getAttribute('content');
 
       cardInfos[postLink.idx] = {
         path: postLink.href,
         header,
         image,
-        topic,
+        // topic,
       };
     }
   });
