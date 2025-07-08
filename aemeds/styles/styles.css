@@ -127,6 +127,7 @@ h4, h5, h6 {
   line-height: 1.25;
   margin: 0;
   scroll-margin: calc(var(--nav-height) + 1em);
+  font-weight: normal;
   /* stylelint-disable-next-line value-no-vendor-prefix */
   -webkit-font-smoothing: antialiased;
 }
