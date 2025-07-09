@@ -200,16 +200,16 @@ dl, ol, ul, pre, blockquote {
   margin-bottom: 1em;
 }
 
-body[class^=blog] main ul li,
-body[class^=blog] main ol li {
+main ul li,
+main ol li {
   font-size: 1.4rem;
   -webkit-font-smoothing: antialiased;
   margin-bottom: 1.2rem;
   list-style: disc;
 }
 
-body[class^=blog] main ol li {
-  list-style-type: decimal;
+main ol li {
+  list-style-type: decimal!important;
 }
 
 hr {
