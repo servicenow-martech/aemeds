@@ -127,6 +127,7 @@ h4, h5, h6 {
   line-height: 1.25;
   margin: 0;
   scroll-margin: calc(var(--nav-height) + 1em);
+  font-weight: normal;
   /* stylelint-disable-next-line value-no-vendor-prefix */
   -webkit-font-smoothing: antialiased;
 }
@@ -199,13 +200,22 @@ dl, ol, ul, pre, blockquote {
   margin-bottom: 1em;
 }
 
-main li {
+body[class^="blog"] li,
+body[class^="blog"] ul{
+  list-style: none!important;
+}
+
+body[class^="blog"] main .default-content-wrapper ul li,
+body[class^="blog"] main .default-content-wrapper ol li {
   font-size: 1.4rem;
   -webkit-font-smoothing: antialiased;
   margin-bottom: 1.2rem;
-  list-style: disc;
+  list-style: disc!important;
 }
 
+body[class^="blog"] main .default-content-wrapper ol li {
+  list-style-type: decimal!important;
+}
 
 hr {
   margin-top: 1.5em;
