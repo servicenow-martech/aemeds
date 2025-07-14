@@ -213,7 +213,7 @@ body[class^="blog"] main .default-content-wrapper ol li {
   list-style: disc!important;
 }
 
-body[class^=blog] main .default-content-wrapper ol li {
+body[class^="blog"] main .default-content-wrapper ol li {
   list-style-type: decimal!important;
 }
 
