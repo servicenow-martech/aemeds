@@ -28,8 +28,6 @@ function clickTrack(card) {
 
       analyticsGlobalClickTrack({
         event: {
-          pageArea: 'body',
-          eVar22,
           click: {
             componentName: 'blog-list',
             destination: link.href,
@@ -52,8 +50,6 @@ function loadMoreClickTrack(e, loadMoreText) {
 
   analyticsGlobalClickTrack({
     event: {
-      pageArea: 'body',
-      eVar22,
       click: {
         componentName: 'blog-list',
         destination: window.location.href,

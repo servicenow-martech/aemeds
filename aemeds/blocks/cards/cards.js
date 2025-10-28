@@ -82,8 +82,6 @@ function clickTrack(card) {
 
       analyticsGlobalClickTrack({
         event: {
-          pageArea: 'body',
-          eVar22,
           click: {
             componentName: 'cards',
             destination: link.href,

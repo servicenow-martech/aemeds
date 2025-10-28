@@ -164,8 +164,6 @@ function addClickTracking(link, block) {
     analyticsGlobalClickTrack(
       {
         event: {
-          pageArea: 'body',
-          eVar22: `blogs:heading:${analyticsCanonicStr(link.textContent)}`,
           click: {
             componentName: block.classList[0],
             destination: link.href,

@@ -34,8 +34,6 @@ export function clickTrack(block) {
 
       analyticsGlobalClickTrack({
         event: {
-          pageArea: 'body',
-          eVar22,
           click: {
             componentName: block.classList[0],
             destination: link.href,

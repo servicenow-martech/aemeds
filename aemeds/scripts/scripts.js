@@ -330,8 +330,6 @@ function articleLinksClickTrack(main) {
 
       analyticsGlobalClickTrack({
         event: {
-          pageArea: 'body',
-          eVar22,
           click: {
             componentName: link.closest('.block')?.classList[0] || 'default-content-wrapper',
             destination: link.href,
