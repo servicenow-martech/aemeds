@@ -326,7 +326,6 @@ function articleLinksClickTrack(main) {
       }
 
       const h1 = analyticsCanonicStr(document.querySelector('h1')?.textContent);
-      const eVar22 = `${h1}:${ctaText}`;
 
       analyticsGlobalClickTrack({
         event: {

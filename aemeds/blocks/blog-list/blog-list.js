@@ -24,7 +24,6 @@ function clickTrack(card) {
       const h1 = analyticsCanonicStr(document.querySelector('h1')?.textContent);
       const cardTitle = analyticsCanonicStr(card.querySelector('h5')?.textContent);
       const ctaText = analyticsCanonicStr(card.querySelector('.cta-readmore')?.textContent);
-      const eVar22 = `${h1}:${cardTitle}:${ctaText}`;
 
       analyticsGlobalClickTrack({
         event: {
@@ -46,7 +45,6 @@ function clickTrack(card) {
 function loadMoreClickTrack(e, loadMoreText) {
   const h1 = analyticsCanonicStr(document.querySelector('h1')?.textContent);
   const ctaText = analyticsCanonicStr(loadMoreText);
-  const eVar22 = `${h1}:${ctaText}`;
 
   analyticsGlobalClickTrack({
     event: {

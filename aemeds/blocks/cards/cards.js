@@ -78,7 +78,6 @@ function clickTrack(card) {
         closestH3(card) || document.querySelector('h1')?.textContent,
       );
       const cardTitle = analyticsCanonicStr(card.querySelector('h5')?.textContent);
-      const eVar22 = `${section}:${cardTitle}`;
 
       analyticsGlobalClickTrack({
         event: {
