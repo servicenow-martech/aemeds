@@ -5,7 +5,6 @@ import {
 } from '../../scripts/dom-helpers.js';
 import {
   BLOG_QUERY_INDEX,
-  analyticsCanonicStr,
   analyticsGlobalClickTrack,
   getLocale,
   getLocaleInfo,
