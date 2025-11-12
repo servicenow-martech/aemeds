@@ -30,12 +30,9 @@ export function clickTrack(block) {
         closestH3(block) || document.querySelector('h1')?.textContent,
       );
       const ctaText = analyticsCanonicStr(link.textContent);
-      const eVar22 = `${section}:${ctaText}`;
 
       analyticsGlobalClickTrack({
         event: {
-          pageArea: 'body',
-          eVar22,
           click: {
             componentName: block.classList[0],
             destination: link.href,

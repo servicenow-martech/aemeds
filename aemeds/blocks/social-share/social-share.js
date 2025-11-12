@@ -20,8 +20,6 @@ function socialShareTracking(block) {
 
     analyticsGlobalClickTrack({
       event: {
-        pageArea: 'body',
-        eVar22: ctaText,
         click: {
           componentName: block.classList[0],
           pageArea: 'body',

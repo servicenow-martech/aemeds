@@ -5,7 +5,6 @@ import {
 } from '../../scripts/dom-helpers.js';
 import {
   BLOG_QUERY_INDEX,
-  analyticsCanonicStr,
   analyticsGlobalClickTrack,
   getLocale,
   getLocaleInfo,
@@ -164,8 +163,6 @@ function addClickTracking(link, block) {
     analyticsGlobalClickTrack(
       {
         event: {
-          pageArea: 'body',
-          eVar22: `blogs:heading:${analyticsCanonicStr(link.textContent)}`,
           click: {
             componentName: block.classList[0],
             destination: link.href,

@@ -326,12 +326,9 @@ function articleLinksClickTrack(main) {
       }
 
       const h1 = analyticsCanonicStr(document.querySelector('h1')?.textContent);
-      const eVar22 = `${h1}:${ctaText}`;
 
       analyticsGlobalClickTrack({
         event: {
-          pageArea: 'body',
-          eVar22,
           click: {
             componentName: link.closest('.block')?.classList[0] || 'default-content-wrapper',
             destination: link.href,
